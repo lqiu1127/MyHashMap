@@ -1,8 +1,10 @@
+/* This is a hash map with linear probing (if collision, find the next available space)
+ * and double array and keeps track f keys and values*/
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class MyHashMap<K, V> {
@@ -18,6 +20,8 @@ public class MyHashMap<K, V> {
 	public V[] getValues(){
 		return values;
 	}
+
+	//print the map in sets of ordered pairs
 	public void print(){
 		int index = 0;
 		for (K key: keys){
@@ -28,6 +32,7 @@ public class MyHashMap<K, V> {
 			index++;
 		}
 	}
+
 	//initialize a hashmap with a default initial size
 	public MyHashMap(){
 		keys = (K[]) new Comparable[DEFAULT_SIZE];
@@ -82,6 +87,8 @@ public class MyHashMap<K, V> {
 		//if not found, return null
 		return null;
 	}
+
+	//insert a new element into the map
 	public boolean put(K key, V value){
 		int hashCode = key.hashCode();
 		//if the list is full, allocate more memory
@@ -115,6 +122,8 @@ public class MyHashMap<K, V> {
 		//if somehow not inserted return false
 		return false;
 	}
+
+	//remove a pair from the map based on the key
 	public V remove(K key){
 		int hashCode = key.hashCode();
 		int keyPos = hashCode % maxSize;
@@ -143,6 +152,8 @@ public class MyHashMap<K, V> {
 		return null;
 
 	}
+
+	//remove an pair from the map only if the key and value matched
 	public boolean remove(K key, V value){
 		int hashCode = key.hashCode();
 		int keyPos = hashCode % maxSize;
@@ -174,9 +185,13 @@ public class MyHashMap<K, V> {
 		return false;
 
 	}
+
+	//return the size
 	public int size(){
 		return this.size;
 	}
+
+	//clear all element in the map
 	public boolean clear(){
 		//keys = new ArrayList<K>(maxSize);
 		//values = new ArrayList<V>(maxSize);
@@ -185,9 +200,13 @@ public class MyHashMap<K, V> {
 		size = 0;
 		return true;
 	}
+
+	//check is the map is empty
 	public boolean isEmpty(){
 		return size == 0;
 	}
+
+	//check is map contains a certain key
 	public boolean containsKey(K key){
 		//get the position by % the key's hashcode with the table size
 		int keyPos = key.hashCode() % maxSize;
@@ -209,6 +228,8 @@ public class MyHashMap<K, V> {
 		}
 		return false; // if not in any position
 	}
+
+	//check if the map contains a certain value
 	public boolean containsValue(V value){
 		for (V currValue: values){
 			//if the value at the current index of the array is the same as the one
@@ -218,6 +239,8 @@ public class MyHashMap<K, V> {
 		}
 		return false;
 	}
+
+	//return a set of keys
 	public Set<K> keySet(){
 		Set<K> keySet = new LinkedHashSet<>();
 		for (K currKey: keys){
@@ -228,6 +251,8 @@ public class MyHashMap<K, V> {
 		}
 		return keySet;
 	}
+
+	//return a collection of values
 	public Collection<V> values(){
 		List<V> valueList = new ArrayList<>();
 		for (V  currValue: values){
@@ -238,6 +263,8 @@ public class MyHashMap<K, V> {
 		}
 		return valueList;
 	}
+
+	//put all elements on another map into this map
 	public void putAll(MyHashMap<? extends K,? extends V> map){
 		K[] mapKeys = map.getKeys();
 		V[] mapValues = map.getValues();
