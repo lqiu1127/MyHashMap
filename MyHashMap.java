@@ -1,5 +1,5 @@
 /* This is a hash map with linear probing (if collision, find the next available space)
- * and double array and keeps track f keys and values*/
+ * and double array and keeps track of keys and values*/
 
 import java.util.ArrayList;
 import java.util.Collection;
